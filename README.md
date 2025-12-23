@@ -50,8 +50,8 @@ The OverWatch Win Predictor is a production-ready machine learning system that a
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/overwatch-win-predictor.git
-cd overwatch-win-predictor
+git clone https://github.com/ssokkol/Overwatch-Win-Predictor.git
+cd Overwatch-Win-Predictor
 ```
 
 2. Create a virtual environment:

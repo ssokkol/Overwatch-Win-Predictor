@@ -1,0 +1,39 @@
+# Model hyperparameters tracked by MLflow
+
+model:
+  baseline:
+    max_iter: 1000
+    random_state: 42
+  
+  xgboost:
+    n_estimators: 200
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+  
+  neural_net:
+    embedding_dim: 32
+    hidden_dims: [128, 64, 32]
+    dropout: 0.3
+    learning_rate: 0.001
+    batch_size: 64
+    epochs: 50
+    random_state: 42
+  
+  ensemble:
+    xgboost_weight: 0.6
+    neural_net_weight: 0.4
+
+data:
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+  random_state: 42
+
+features:
+  embedding_dim: 32
+  window_size: 5
+  epochs: 50
+

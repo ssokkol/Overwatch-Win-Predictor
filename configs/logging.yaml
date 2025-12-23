@@ -1,0 +1,50 @@
+version: 1
+disable_existing_loggers: false
+
+formatters:
+  standard:
+    format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+  
+  json:
+    format: "%(asctime)s"
+    class: "src.utils.logger.SecureJSONFormatter"
+
+handlers:
+  console:
+    class: "logging.StreamHandler"
+    level: "INFO"
+    formatter: "standard"
+    stream: "ext://sys.stdout"
+  
+  file:
+    class: "logging.handlers.RotatingFileHandler"
+    level: "INFO"
+    formatter: "json"
+    filename: "logs/overwatch_predictor.log"
+    maxBytes: 10485760  # 10MB
+    backupCount: 5
+  
+  error_file:
+    class: "logging.handlers.RotatingFileHandler"
+    level: "ERROR"
+    formatter: "json"
+    filename: "logs/errors.log"
+    maxBytes: 10485760  # 10MB
+    backupCount: 5
+
+loggers:
+  src:
+    level: "INFO"
+    handlers: ["console", "file"]
+    propagate: false
+  
+  src.api:
+    level: "INFO"
+    handlers: ["console", "file", "error_file"]
+    propagate: false
+
+root:
+  level: "INFO"
+  handlers: ["console"]
+

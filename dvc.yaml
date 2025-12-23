@@ -1,0 +1,40 @@
+stages:
+  collect_data:
+    cmd: python -m src.data.collect_matches
+    deps:
+      - src/data/collect_matches.py
+      - src/data/generate_synthetic.py
+    outs:
+      - data/raw/synthetic_matches.csv
+
+  preprocess_data:
+    cmd: python -m src.data.preprocess
+    deps:
+      - data/raw/synthetic_matches.csv
+      - src/data/preprocess.py
+    outs:
+      - data/processed/train.csv
+      - data/processed/val.csv
+      - data/processed/test.csv
+
+  train_embeddings:
+    cmd: python scripts/train_embeddings.py
+    deps:
+      - data/processed/train.csv
+      - src/features/embeddings.py
+    outs:
+      - data/embeddings/hero_embeddings.npy
+
+  train_models:
+    cmd: python scripts/train_models.py
+    deps:
+      - data/processed/train.csv
+      - data/processed/val.csv
+      - data/embeddings/hero_embeddings.npy
+      - src/models/
+      - src/features/
+    outs:
+      - models/ensemble/
+    metrics:
+      - metrics/model_performance.json
+

@@ -25,6 +25,12 @@ def sample_team2() -> list[int]:
     return [2, 7, 12, 17, 21]  # Ashe, D.Va, Junker Queen, Mauga, Orisa
 
 
+@pytest.fixture(autouse=True)
+def _allow_missing_model(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Allow placeholder model during tests when artifacts are missing."""
+    monkeypatch.setenv("ALLOW_MISSING_MODEL", "true")
+
+
 @pytest.fixture
 def hero_metadata():
     """Hero metadata fixture."""

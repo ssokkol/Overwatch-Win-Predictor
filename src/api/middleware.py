@@ -1,7 +1,6 @@
 """Security middleware for FastAPI application."""
 
 import os
-import time
 from typing import Callable
 
 from fastapi import HTTPException, Request, status
@@ -153,4 +152,3 @@ def setup_trusted_host_middleware(app: any) -> None:
         TrustedHostMiddleware,
         allowed_hosts=allowed_hosts,
     )
-

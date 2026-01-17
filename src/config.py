@@ -1,6 +1,4 @@
 """Application configuration and settings."""
-
-import os
 from functools import lru_cache
 from typing import List
 
@@ -89,4 +87,3 @@ def get_settings() -> Settings:
         Settings instance
     """
     return Settings()
-

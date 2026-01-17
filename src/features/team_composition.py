@@ -128,11 +128,23 @@ class TeamCompositionFeatureExtractor:
         # Between-team distance
         centroid_distance = np.linalg.norm(team1_centroid - team2_centroid)
 
+        team1_similarity = (
+            float(np.mean(team1_similarities)) if team1_similarities else 0.0
+        )
+        team2_similarity = (
+            float(np.mean(team2_similarities)) if team2_similarities else 0.0
+        )
+        similarity_diff = (
+            float(np.mean(team1_similarities) - np.mean(team2_similarities))
+            if (team1_similarities and team2_similarities)
+            else 0.0
+        )
+
         return {
-            "team1_internal_similarity": float(np.mean(team1_similarities)) if team1_similarities else 0.0,
-            "team2_internal_similarity": float(np.mean(team2_similarities)) if team2_similarities else 0.0,
+            "team1_internal_similarity": team1_similarity,
+            "team2_internal_similarity": team2_similarity,
             "centroid_distance": float(centroid_distance),
-            "similarity_diff": float(np.mean(team1_similarities) - np.mean(team2_similarities)) if (team1_similarities and team2_similarities) else 0.0,
+            "similarity_diff": similarity_diff,
         }
 
     def _extract_synergy_features(
@@ -195,4 +207,3 @@ class TeamCompositionFeatureExtractor:
         # Sort by key for consistent ordering
         feature_values = [features[key] for key in sorted(features.keys())]
         return np.array(feature_values, dtype=np.float32)
-

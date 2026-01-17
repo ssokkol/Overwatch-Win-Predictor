@@ -6,7 +6,6 @@ from typing import List, Tuple
 
 import numpy as np
 import pandas as pd
-from numpy.typing import NDArray
 
 from src.utils.heroes import get_hero_metadata
 
@@ -185,4 +184,3 @@ if __name__ == "__main__":
     df = generate_synthetic_data(n_matches=10000, output_path=output_file)
     print(f"\nGenerated dataset shape: {df.shape}")
     print(f"Winner distribution:\n{df['winner'].value_counts()}")
-

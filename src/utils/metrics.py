@@ -90,4 +90,3 @@ def calculate_calibration_error(
             ece += np.abs(avg_confidence_in_bin - accuracy_in_bin) * prop_in_bin
 
     return float(ece)
-

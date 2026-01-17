@@ -55,4 +55,3 @@ if __name__ == "__main__":
     output_file = data_dir / "synthetic_matches.csv"
     df = collect_and_save_matches(output_file, n_matches=10000)
     print(f"Generated dataset: {df.shape}")
-

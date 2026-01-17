@@ -179,4 +179,3 @@ class HealthResponse(BaseModel):
                 "version": "1.0.0",
             }
         }
-

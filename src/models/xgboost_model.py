@@ -193,4 +193,3 @@ class XGBoostModel:
         logger.info(f"XGBoost model loaded from {model_path}")
 
         return instance
-

@@ -60,4 +60,3 @@ class TestAPIKeyAuthentication:
                 os.environ["API_KEYS"] = original_keys
             else:
                 os.environ.pop("API_KEYS", None)
-

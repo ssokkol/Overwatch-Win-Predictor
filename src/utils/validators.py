@@ -1,6 +1,6 @@
 """Input validation utilities."""
 
-from typing import List, Set
+from typing import List
 
 from src.utils.heroes import get_hero_metadata
 
@@ -149,4 +149,3 @@ def validate_match_request(
         errors.append(str(e))
 
     return (len(errors) == 0, errors)
-

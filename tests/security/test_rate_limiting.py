@@ -28,4 +28,3 @@ class TestRateLimiting:
         for _ in range(10):
             response = client.get("/health")
             assert response.status_code == 200
-

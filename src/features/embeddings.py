@@ -189,4 +189,3 @@ def save_hero_embeddings(embeddings: NDArray[np.float32], embeddings_path: Path)
     """
     embeddings_path.parent.mkdir(parents=True, exist_ok=True)
     np.save(embeddings_path, embeddings)
-

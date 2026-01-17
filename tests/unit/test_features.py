@@ -2,7 +2,6 @@
 
 import numpy as np
 import pytest
-from numpy.typing import NDArray
 
 from src.features.hero_features import HeroFeatureExtractor
 from src.features.team_composition import TeamCompositionFeatureExtractor
@@ -99,4 +98,3 @@ class TestTeamCompositionFeatureExtractor:
         assert isinstance(feature_vector, np.ndarray)
         assert feature_vector.dtype == np.float32
         assert len(feature_vector) > 0
-

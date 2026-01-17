@@ -52,13 +52,19 @@ def feature_extractor(embeddings: NDArray[np.float32]) -> HeroFeatureExtractor:
 
 
 @pytest.fixture
-def team_feature_extractor(embeddings: NDArray[np.float32]) -> TeamCompositionFeatureExtractor:
+def team_feature_extractor(
+    embeddings: NDArray[np.float32],
+) -> TeamCompositionFeatureExtractor:
     """Team composition feature extractor fixture."""
     return TeamCompositionFeatureExtractor(embeddings=embeddings)
 
 
 @pytest.fixture
-def sample_features(team_feature_extractor: TeamCompositionFeatureExtractor, sample_team1: list[int], sample_team2: list[int]) -> NDArray[np.float32]:
+def sample_features(
+    team_feature_extractor: TeamCompositionFeatureExtractor,
+    sample_team1: list[int],
+    sample_team2: list[int],
+) -> NDArray[np.float32]:
     """Sample feature vector."""
     return team_feature_extractor.extract_feature_vector(sample_team1, sample_team2)
 
@@ -94,7 +100,10 @@ def neural_net_model() -> NeuralNetModel:
 
 
 @pytest.fixture
-def trained_baseline_model(baseline_model: BaselineModel, sample_training_data: tuple) -> BaselineModel:
+def trained_baseline_model(
+    baseline_model: BaselineModel,
+    sample_training_data: tuple,
+) -> BaselineModel:
     """Trained baseline model fixture."""
     X, y = sample_training_data
     baseline_model.train(X, y)
@@ -102,7 +111,10 @@ def trained_baseline_model(baseline_model: BaselineModel, sample_training_data: 
 
 
 @pytest.fixture
-def trained_xgboost_model(xgboost_model: XGBoostModel, sample_training_data: tuple) -> XGBoostModel:
+def trained_xgboost_model(
+    xgboost_model: XGBoostModel,
+    sample_training_data: tuple,
+) -> XGBoostModel:
     """Trained XGBoost model fixture."""
     X, y = sample_training_data
     xgboost_model.train(X, y)
@@ -110,7 +122,10 @@ def trained_xgboost_model(xgboost_model: XGBoostModel, sample_training_data: tup
 
 
 @pytest.fixture
-def trained_neural_net_model(neural_net_model: NeuralNetModel, sample_training_data: tuple) -> NeuralNetModel:
+def trained_neural_net_model(
+    neural_net_model: NeuralNetModel,
+    sample_training_data: tuple,
+) -> NeuralNetModel:
     """Trained neural network model fixture."""
     X, y = sample_training_data
     neural_net_model.train(X, y)
@@ -118,7 +133,10 @@ def trained_neural_net_model(neural_net_model: NeuralNetModel, sample_training_d
 
 
 @pytest.fixture
-def ensemble_model(trained_xgboost_model: XGBoostModel, trained_neural_net_model: NeuralNetModel) -> EnsembleModel:
+def ensemble_model(
+    trained_xgboost_model: XGBoostModel,
+    trained_neural_net_model: NeuralNetModel,
+) -> EnsembleModel:
     """Ensemble model fixture."""
     ensemble = EnsembleModel(
         xgboost_model=trained_xgboost_model,
@@ -127,4 +145,3 @@ def ensemble_model(trained_xgboost_model: XGBoostModel, trained_neural_net_model
         neural_net_weight=0.4,
     )
     return ensemble
-

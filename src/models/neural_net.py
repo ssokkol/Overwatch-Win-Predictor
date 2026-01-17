@@ -274,4 +274,3 @@ class NeuralNetModel:
         logger.info(f"Neural network model loaded from {model_path}")
 
         return instance
-

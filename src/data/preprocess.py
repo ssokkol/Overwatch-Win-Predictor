@@ -35,7 +35,9 @@ def load_match_data(data_path: Path) -> pd.DataFrame:
     return df
 
 
-def extract_team_compositions(df: pd.DataFrame) -> Tuple[list[list[int]], list[list[int]], NDArray[np.int_]]:
+def extract_team_compositions(
+    df: pd.DataFrame,
+) -> Tuple[list[list[int]], list[list[int]], NDArray[np.int_]]:
     """
     Extract team compositions from DataFrame.
 
@@ -79,7 +81,14 @@ def train_val_test_split(
     val_ratio: float = 0.15,
     test_ratio: float = 0.15,
     random_state: int = 42,
-) -> Tuple[NDArray[np.float_], NDArray[np.float_], NDArray[np.float_], NDArray[np.int_], NDArray[np.int_], NDArray[np.int_]]:
+) -> Tuple[
+    NDArray[np.float_],
+    NDArray[np.float_],
+    NDArray[np.float_],
+    NDArray[np.int_],
+    NDArray[np.int_],
+    NDArray[np.int_],
+]:
     """
     Split data into train, validation, and test sets.
 
@@ -136,24 +145,23 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
         Removes rows with missing values or invalid team compositions.
     """
     original_len = len(df)
-    
     # Remove rows with missing winner
     df = df.dropna(subset=["winner"])
-    
     # Remove rows with invalid team compositions
     valid_rows = []
     for idx, row in df.iterrows():
         team1_heroes = [row.get(f"team1_hero{i}") for i in range(1, 6)]
         team2_heroes = [row.get(f"team2_hero{i}") for i in range(1, 6)]
-        
-        if all(pd.notna(h) for h in team1_heroes) and all(pd.notna(h) for h in team2_heroes):
+
+        if all(pd.notna(h) for h in team1_heroes) and all(
+            pd.notna(h) for h in team2_heroes
+        ):
             valid_rows.append(idx)
-    
+
     df = df.loc[valid_rows]
-    
+
     removed = original_len - len(df)
     if removed > 0:
         logger.info(f"Removed {removed} invalid rows")
-    
-    return df.reset_index(drop=True)
 
+    return df.reset_index(drop=True)

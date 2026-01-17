@@ -171,4 +171,3 @@ class HeroFeatureExtractor:
         """
         self.hero_pick_rates = hero_pick_rates
         self.hero_win_rates = hero_win_rates
-

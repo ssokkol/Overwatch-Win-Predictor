@@ -2,11 +2,9 @@
 
 import os
 from pathlib import Path
-from typing import List
 
 import numpy as np
-from fastapi import Depends, FastAPI, HTTPException, Security, status
-from numpy.typing import NDArray
+from fastapi import Depends, FastAPI, HTTPException, status
 
 from src.api.dependencies import get_model, get_redis_client, verify_api_key
 from src.api.middleware import (
@@ -98,7 +96,6 @@ async def predict_match(
         embeddings_path = Path("data/embeddings/hero_embeddings.npy")
         embeddings = None
         if embeddings_path.exists():
-            import numpy as np
             embeddings = np.load(embeddings_path)
 
         # Extract features
@@ -196,7 +193,10 @@ async def get_recommendations(
             ][:remaining_needed]
             recommended.extend(other_heroes)
 
-        reasoning = "Recommended heroes to balance team composition and provide strong counter-picks."
+        reasoning = (
+            "Recommended heroes to balance team composition and provide strong "
+            "counter-picks."
+        )
 
         return RecommendationResponse(
             recommended_heroes=recommended[: request.num_recommendations],
@@ -236,4 +236,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

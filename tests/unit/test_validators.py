@@ -92,4 +92,3 @@ class TestValidators:
 
         assert is_valid is False
         assert len(errors) > 0
-

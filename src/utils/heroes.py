@@ -2,7 +2,7 @@
 
 import json
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional
 
 HERO_DATA_PATH = Path(__file__).parent.parent.parent / "configs" / "heroes.json"
 
@@ -171,4 +171,3 @@ def get_hero_metadata() -> HeroMetadata:
     if _hero_metadata is None:
         _hero_metadata = HeroMetadata()
     return _hero_metadata
-

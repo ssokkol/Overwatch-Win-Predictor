@@ -61,24 +61,24 @@ class RateLimiter:
         try:
             key = f"rate_limit:{identifier}"
             pipe = self.redis_client.pipeline()
-            
+
             # Get current timestamps
             pipe.zrangebyscore(key, current_time - self.period, current_time)
             pipe.zcard(key)
             pipe.zremrangebyscore(key, 0, current_time - self.period)
-            
+
             # Add current request
             pipe.zadd(key, {str(current_time): current_time})
             pipe.expire(key, self.period)
-            
+
             results = pipe.execute()
             current_count = results[1] + 1  # +1 for current request
-            
+
             is_allowed = current_count <= self.max_calls
             remaining = max(0, self.max_calls - current_count) if is_allowed else 0
-            
+
             return is_allowed, remaining
-            
+
         except Exception as e:
             logger.warning(f"Redis rate limit check failed: {e}, falling back to memory")
             return self._check_memory(identifier, current_time)
@@ -114,4 +114,3 @@ class RateLimiter:
 
         remaining = self.max_calls - current_count - 1
         return True, remaining
-

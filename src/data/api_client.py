@@ -10,7 +10,11 @@ logger = setup_logger(__name__)
 class OverwatchAPIClient:
     """Client for Overwatch API (placeholder implementation)."""
 
-    def __init__(self, api_key: str | None = None, base_url: str = "https://api.overwatch.com") -> None:
+    def __init__(
+        self,
+        api_key: str | None = None,
+        base_url: str = "https://api.overwatch.com",
+    ) -> None:
         """
         Initialize API client.
 
@@ -74,4 +78,3 @@ class OverwatchAPIClient:
         """
         # Placeholder: Return as-is
         return match_data
-

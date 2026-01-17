@@ -109,4 +109,3 @@ class TestEnsembleModel:
         """Test that invalid weights raise ValueError."""
         with pytest.raises(ValueError, match="Weights must sum to 1.0"):
             EnsembleModel(xgboost_weight=0.6, neural_net_weight=0.5)
-

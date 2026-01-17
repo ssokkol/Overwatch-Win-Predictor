@@ -1,7 +1,6 @@
 """Ensemble model combining XGBoost and Neural Network."""
 
 from pathlib import Path
-from typing import Dict
 
 import numpy as np
 from numpy.typing import NDArray
@@ -200,4 +199,3 @@ class EnsembleModel:
         logger.info(f"Ensemble model loaded from {model_dir}")
 
         return instance
-

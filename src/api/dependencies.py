@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Optional
 
 import numpy as np
-from fastapi import Depends, HTTPException, Security, status
+from fastapi import HTTPException, Security, status
 from fastapi.security import APIKeyHeader
 
 try:
@@ -106,7 +106,7 @@ def get_model() -> EnsembleModel:
 
     if _model_cache is None:
         model_dir = Path(os.getenv("MODEL_DIR", "models/ensemble"))
-        
+
         if not model_dir.exists():
             if _allow_missing_model():
                 logger.warning(
@@ -138,7 +138,7 @@ def get_redis_client() -> Optional[any]:
         if redis is None:
             logger.warning("Redis not installed. Using in-memory cache.")
             return None
-        
+
         redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
         redis_password = os.getenv("REDIS_PASSWORD", "")
 
@@ -156,4 +156,3 @@ def get_redis_client() -> Optional[any]:
             _redis_client = None
 
     return _redis_client
-

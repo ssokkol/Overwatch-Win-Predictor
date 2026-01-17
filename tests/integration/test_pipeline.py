@@ -1,11 +1,9 @@
 """Integration tests for data pipeline."""
 
 import numpy as np
-import pytest
-from numpy.typing import NDArray
 
 from src.data.generate_synthetic import generate_synthetic_data
-from src.data.preprocess import extract_team_compositions, load_match_data
+from src.data.preprocess import load_match_data
 from src.features.team_composition import TeamCompositionFeatureExtractor
 
 
@@ -39,4 +37,3 @@ class TestDataPipeline:
         features = team_feature_extractor.extract_feature_vector(team1, team2)
         assert isinstance(features, np.ndarray)
         assert len(features) > 0
-

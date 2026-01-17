@@ -135,4 +135,3 @@ class BaselineModel:
         logger.info(f"Baseline model loaded from {model_path}")
 
         return instance
-

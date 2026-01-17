@@ -20,6 +20,12 @@ def api_key() -> str:
     return "test-api-key"
 
 
+@pytest.fixture(autouse=True)
+def _set_default_api_keys(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Ensure tests use the same API key as request headers."""
+    monkeypatch.setenv("API_KEYS", "test-api-key")
+
+
 class TestHealthEndpoint:
     """Test health check endpoint."""
 

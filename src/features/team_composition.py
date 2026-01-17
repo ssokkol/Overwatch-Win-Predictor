@@ -68,6 +68,9 @@ class TeamCompositionFeatureExtractor:
         synergy_features = self._extract_synergy_features(team1, team2)
         features.update(synergy_features)
 
+        # Size comparison (keeps feature vector length consistent)
+        features["team_size_diff"] = float(len(team1) - len(team2))
+
         return features
 
     def _extract_embedding_comparison(

@@ -58,10 +58,12 @@ def sample_features(team_feature_extractor: TeamCompositionFeatureExtractor, sam
 
 
 @pytest.fixture
-def sample_training_data() -> tuple[NDArray[np.float_], NDArray[np.int_]]:
+def sample_training_data(
+    sample_features: NDArray[np.float32],
+) -> tuple[NDArray[np.float_], NDArray[np.int_]]:
     """Sample training data."""
     n_samples = 100
-    n_features = 50
+    n_features = sample_features.shape[0]
     X = np.random.rand(n_samples, n_features).astype(np.float32)
     y = np.random.randint(0, 2, n_samples).astype(np.int_)
     return X, y
